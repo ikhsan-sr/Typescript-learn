@@ -29,10 +29,17 @@ let user = new User("Muhammad Ikhsan", 23);
 
 // console.log(user);
 
-// Inheritance
 class Admin extends User {
   read: boolean = true;
   write: boolean = true;
+  phone: string;
+  private _email: string = "";
+  static getRoleName: string = "Admin";
+
+  constructor(phone: string, name: string, age: number) {
+    super(name, age);
+    this.phone = phone;
+  }
 
   getRole(): { read: boolean; write: boolean } {
     return {
@@ -40,10 +47,19 @@ class Admin extends User {
       write: this.write,
     };
   }
+
+  set email(value: string) {
+    if (value.length < 5) {
+      this._email = "Email salah";
+    } else {
+      this._email = value;
+    }
+  }
+
+  get email(): string {
+    return this._email;
+  }
 }
 
-let admin = new Admin("Ikhsan Admin", 23);
-admin.getName();
-admin.getRole();
-admin.setAge(99);
+let admin = Admin.getRoleName;
 console.log(admin);
